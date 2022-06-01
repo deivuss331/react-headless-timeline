@@ -10,6 +10,7 @@ Headless components for building custom timelines for React. Headless means it d
 * 🔒 Type safe - written in TypeScript
 * 🫧 Doesn't render any UI - it's up to you how you're going to style your timeline
 * 🏃‍ Small bundle size
+* 🧪 Well tested - tests cover 100% of code
 
 ### Overview
 
