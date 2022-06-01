@@ -141,6 +141,7 @@ Render function example:
     </div>
   )}
 />
+```
 
 ### Demos
 
