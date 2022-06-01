@@ -58,14 +58,14 @@ import Timeline from 'react-headless-timeline';
 
 function App() {
   const timelineConfig = {
-    startDate: new Date(1651201447127), // 29th Apr 2022 05:04:07
-    endDate: new Date(1651221447127), // 29th Apr 2022 10:37:27
+    startDate: new Date(1651201447127), // 29th Apr 2022 05:04:07 CET
+    endDate: new Date(1651221447127), // 29th Apr 2022 10:37:27 CET
   }
 
   const events = [
     { 
-      startDate: new Date(1651204649127), // 29th Apr 2022 05:57:29
-      endDate: new Date(1651214649127), // 29th Apr 2022 08:44:09
+      startDate: new Date(1651204649127), // 29th Apr 2022 05:57:29 CET
+      endDate: new Date(1651214649127), // 29th Apr 2022 08:44:09 CET
     },
   ];
   
