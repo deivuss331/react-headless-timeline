@@ -1,15 +1,15 @@
 # ⚡️ React Headless Timeline
 
-Headless components for building custom timelines for React. Headless means it doesn't provide any UI for the timeline but only handle the logic. Supports both horizontal and vertical timelines.
+Headless components for building custom timelines for React. Headless means it doesn't provide any UI for the timeline but only handles the logic. Supports both horizontal and vertical timelines.
 
 ### Features
 
 ---
 
-* ⚡️ Highly performant and efficient
-* 🔒 Type safe - written in TypeScript
+* ⚡️ Highly performant and efficient.
+* 🔒 Type safe - written in TypeScript.
 * 🫧 Doesn't render any UI. It's up to you how you're going to style your timeline.
-* 🏃‍ Small bundle size
+* 🏃‍ Small bundle size.
 
 ### Overview
 
@@ -24,7 +24,22 @@ See what library **does** and what **doesn't** for you to decide whether it's a 
 **👎 What it doesn't for you:**
 * It doesn't provide any pre-made UI components for you (no need to overwrite any styles to make timeline looks like in designer's dream)
 
-Still not sure? Check some [demos ⬇️](#demos)
+Still not sure? Check some [examples ⬇️](#examples)
+
+### Content
+
+---
+
+* [Features](#features)
+* [Overview](#overview)
+* [Install](#install)
+* [Quick start](#quick-start)
+* [API](#api)
+  * [Timeline Provider](#timelineprovider)
+  * [Timeline Headers](#timelineheaders)
+  * [Timeline Events](#timelineevents)
+  * [Timeline Current Time Indicator](#timelineindicatorscurrenttime)
+* [Examples](#examples)
 
 ### Install
 
@@ -90,69 +105,118 @@ function App() {
 
 ---
 
-#### TimelineProvider
+* #### Timeline.Provider
 
-| Property | Required? | Type / value                            | Default value | Description           |
-|---------|-----------|-----------------------------------------|---------------|-----------------------|
-| startDate | Yes       | `Date`                                  |               | Timeline's start date |
-| endDate | Yes       | `Date`                                  |               | Timeline's end date   |
-| direction | No        | `"horizontal"` / `"vertical"` |  `"horizontal"` | Determines timeline direction |
+  Core timeline component. Provides common props for it's children.
 
-#### TimelineHeaders
+  | Property | Required? | Type / value                            | Default value | Description           |
+  |---------|-----------|-----------------------------------------|---------------|-----------------------|
+  | startDate | Yes       | `Date`                                  |               | Timeline's start date |
+  | endDate | Yes       | `Date`                                  |               | Timeline's end date   |
+  | direction | No        | `"horizontal"` / `"vertical"` |  `"horizontal"` | Determines timeline direction |
+  
+  ```jsx
+  import Timeline from 'react-headless-timeline';
+  
+  // ...
+  
+  <Timeline.Provider startDate={new Date()} endDate={new Date()} direction="horizontal">
+    {children}
+  </Timeline.Provider>
+  ```
+  
+  ---
 
-| Property | Required? | Type       | Default value | Min. value | Description                                          |
-| --- |-----------|------------|---------------|------------|------------------------------------------------------|
-| cells | No        | `number`   | 2             | 2          | Determines how many headers/cells you want to render |
-| render | Yes       | `function` |               | | Render prop function. See example below...           |
+* #### Timeline.Headers
 
-Render function example:
+  Provides headers and helper function to generate headers CSS styles (size and position).
 
-```jsx
-<Timeline.Events
-  render={({ getEventStyles }) => (
-    <div>
-      {events.map((evt, i) => (
-        <span key={i} style={getEventStyles(evt)}>
-          Event
-        </span>
-      ))}
-    </div>
-  )}
-/>
-```
+  | Property | Required? | Type       | Default value | Min. value | Description                                          |
+  | --- |-----------|------------|---------------|------------|------------------------------------------------------|
+  | cells | No        | `number`   | 2             | 2          | Determines how many headers/cells you want to render |
+  | render | Yes       | `function` |               | | Render prop function. See example below...           |
 
-#### TimelineEvents
+  Example:
 
-| Property | Required? | Type       | Default value | Min. value | Description                                          |
-| --- |-----------|------------|---------------|------------|------------------------------------------------------|
-| render | Yes       | `function` |               | | Render prop function. See example below...           |
+  ```jsx
+  import Timeline from 'react-headless-timeline';
+  
+  // ...
+  
+  <Timeline.Headers
+    render={({ headers, getHeaderStyles }) => (
+      <div>
+        {headers.map((header) => (
+          <span key={header.getTime()} style={getHeaderStyles(header)}>
+            {header.getTime()}
+          </span>
+        ))}
+      </div>
+    )}
+  />
+  ```
+  
+  ---
 
-Render function example:
+* #### Timeline.Events
 
-```jsx
-<Timeline.Events
-  render={({ headers, getHeaderStyles }) => (
-    <div>
-      {headers.map((header) => (
-        <span key={header.getTime()} style={getHeaderStyles(header)}>
-          {header.getTime()}
-        </span>
-      ))}
-    </div>
-  )}
-/>
-```
+  Provides helper function to generate event CSS styles (size and position).
 
-### Demos
+  | Property | Required? | Type       | Default value | Min. value | Description                                          |
+  | --- |-----------|------------|---------------|------------|------------------------------------------------------|
+  | render | Yes       | `function` |               | | Render prop function. See example below...           |
+
+  Example:
+
+  ```jsx
+  import Timeline from 'react-headless-timeline';
+  
+  // ...
+  
+  <Timeline.Events
+    render={({ getEventStyles }) => (
+      <div>
+        {events.map((evt, i) => (
+          <span key={i} style={getEventStyles(evt)}>
+            Event
+          </span>
+        ))}
+      </div>
+    )}
+  />
+  ```
+  
+  ---
+  
+* #### Timeline.Indicators.CurrentTime
+
+  Provides current time indicator with update every second or full minute.
+  
+  | Property | Required? | Type / value | Default value | Description |
+  | --- | --- | --- | --- | --- |
+  | updateInterval | No | `"second"` / `"minute"` | `"minute"` | Determines update interval. In most cases you'll want to use `"minute"` option to limit re-renders |
+  | render | Yes | `function` | | Render prop function. See example below... |
+  
+  Example:
+
+  ```jsx
+  import Timeline from 'react-headless-timeline';
+  
+  // ...
+  
+  <Timeline.Indicators.CurrentTime
+    render={({ currentTime, styles }) => (
+      <div style={{ height: '100%', ...styles }}>
+        <StyledHeader>{currentTime.getTime()}</StyledHeader>
+      </div>
+    )}
+  />
+  ```
+
+  ---
+
+### Examples
 
 ---
 
 TODO
-
-### Future goals
-
----
-
-This library is under active development. Current future goals are:
-
-* Detection of collision between events (one event is overlapping with the other one)
