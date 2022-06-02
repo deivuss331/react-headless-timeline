@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { addMinutes, differenceInMilliseconds, roundToNearestMinutes } from 'date-fns';
-import { useLeftOffsetCalculator } from '../hooks';
+import { useLeftOffsetCalculator } from '../../hooks';
 
 const MILLISECONDS_IN_SECOND: number = 1000;
 const SECONDS_IN_MINUTE: number = 60;
