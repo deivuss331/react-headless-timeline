@@ -40,6 +40,7 @@ Still not sure? Check some [examples ⬇️](#examples)
   * [Timeline Headers](#timelineheaders)
   * [Timeline Events](#timelineevents)
   * [Timeline Current Time Indicator](#timelineindicatorscurrenttime)
+* [Rules](#rules)
 * [Examples](#examples)
 
 ### Install
@@ -215,6 +216,12 @@ function App() {
   ```
 
   ---
+  
+### Rules
+
+---
+
+* You should use CSS `box-sizing: border-box` on your timeline components to prevent sizing bugs.
 
 ### Examples
 
