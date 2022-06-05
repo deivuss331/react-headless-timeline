@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { addMinutes, differenceInMilliseconds, roundToNearestMinutes } from 'date-fns';
-import { useLeftOffsetCalculator } from '../../hooks';
+import { useOffsetCalculator, useTimelineProvider } from '../../hooks';
 
 const MILLISECONDS_IN_SECOND: number = 1000;
 const SECONDS_IN_MINUTE: number = 60;
@@ -20,9 +20,11 @@ interface TimelineCurrentTimeProps {
 
 function TimelineCurrentTime({ updateInterval = 'minute', render }: TimelineCurrentTimeProps): JSX.Element {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
-  const calcLeftOffset = useLeftOffsetCalculator();
+  const { direction } = useTimelineProvider();
+  const calcOffset = useOffsetCalculator();
 
   const isSecondInterval: boolean = updateInterval === 'second';
+  const isHorizontalTimeline: boolean = direction === 'horizontal';
 
   useEffect(() => {
     const now: Date = new Date();
@@ -52,7 +54,7 @@ function TimelineCurrentTime({ updateInterval = 'minute', render }: TimelineCurr
 
   const styles: React.CSSProperties = {
     position: 'absolute',
-    left: calcLeftOffset(currentTime),
+    ...(isHorizontalTimeline ? { left: calcOffset(currentTime) } : { top: calcOffset(currentTime) }),
   };
 
   return render({ currentTime, styles });

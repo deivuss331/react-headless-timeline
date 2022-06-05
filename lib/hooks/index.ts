@@ -1,3 +1,3 @@
 export { default as useTimelineProvider } from './useTimelineProvider';
-export { default as useLeftOffsetCalculator } from './useLeftOffsetCalculator';
-export { default as useWidthCalculator } from './useWidthCalculator';
+export { default as useOffsetCalculator } from './useOffsetCalculator';
+export { default as useSizeCalculator } from './useSizeCalculator';

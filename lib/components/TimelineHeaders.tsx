@@ -1,5 +1,5 @@
 import { add } from 'date-fns';
-import { useTimelineProvider, useLeftOffsetCalculator } from '../hooks';
+import { useTimelineProvider, useOffsetCalculator } from '../hooks';
 
 const CELLS_MIN: number = 2;
 const CELLS_DEFAULT: number = CELLS_MIN;
@@ -17,10 +17,11 @@ interface TimelineHeaderProps {
 }
 
 function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps): JSX.Element {
-  const { startDate, endDate } = useTimelineProvider();
-  const calcLeftOffset = useLeftOffsetCalculator();
+  const { startDate, endDate, direction } = useTimelineProvider();
+  const calcOffset = useOffsetCalculator();
 
   const isCellsQtyValid: boolean = cells > CELLS_MIN;
+  const isHorizontalTimeline: boolean = direction === 'horizontal';
 
   const cellSizeMs: number = Math.round((endDate.getTime() - startDate.getTime()) / cells);
   const headers = isCellsQtyValid
@@ -32,7 +33,7 @@ function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps)
 
   const getHeaderStyles = (header: Date): React.CSSProperties => ({
     position: 'absolute',
-    left: calcLeftOffset(header),
+    ...(isHorizontalTimeline ? { left: calcOffset(header) } : { top: calcOffset(header) }),
   });
 
   return render({ headers, getHeaderStyles });

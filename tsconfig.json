@@ -20,7 +20,8 @@
     "declarationDir": "dist/types",
     "emitDeclarationOnly": true,
     "noEmit": false,
-    "jsx": "react"
+    "jsx": "react",
+    "esModuleInterop": true
   },
   "include": ["lib/**/*"],
   "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
