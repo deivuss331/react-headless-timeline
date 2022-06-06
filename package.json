@@ -1,6 +1,6 @@
 {
   "name": "react-headless-timeline",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "React hooks to help you build performant and responsive timelines with ease.",
   "main": "dist/react-headless-timeline.min.js",
   "module": "dist/react-headless-timeline.esm.js",
