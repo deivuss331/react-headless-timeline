@@ -23,7 +23,7 @@ function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps)
   const isCellsQtyValid: boolean = cells > CELLS_MIN;
   const isHorizontalTimeline: boolean = direction === 'horizontal';
 
-  const cellSizeMs: number = Math.round((endDate.getTime() - startDate.getTime()) / cells);
+  const cellSizeMs: number = Math.round((endDate.getTime() - startDate.getTime()) / (cells - 1));
   const headers = isCellsQtyValid
     ? new Array(cells).fill(null).reduce<Date[]>((dates, _, index) => {
         dates.push(add(startDate, { seconds: (cellSizeMs / MILLISECONDS_IN_SECOND) * index }));
