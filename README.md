@@ -2,6 +2,12 @@
 
 Headless components for building custom timelines for React. Headless means it doesn't provide any UI for the timeline but only handles the logic. Supports both horizontal and vertical timelines.
 
+<div style="display: grid; place-items: center;">
+ <div style="width: 100%; max-width: 1920px;">
+  <img src="https://raw.githubusercontent.com/deivuss331/react-headless-timeline/main/react-headless-timeline-demo.png" alt="React Headless Timeline" />
+ </div>
+</div>
+
 ### Features
 
 ---
