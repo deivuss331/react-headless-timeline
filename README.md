@@ -109,20 +109,24 @@ function App() {
 
 * #### Timeline.Provider
 
-  Core timeline component. Provides common props for it's children.
+  Core timeline component. You have to wrap all of your timeline components inside provider.
+  
+  **Props:** (* - these are required)
 
-  | Property | Required? | Type / value                            | Default value | Description           |
-  |---------|-----------|-----------------------------------------|---------------|-----------------------|
-  | startDate | Yes       | `Date`                                  |               | Timeline's start date |
-  | endDate | Yes       | `Date`                                  |               | Timeline's end date   |
-  | direction | No        | `"horizontal"` / `"vertical"` |  `"horizontal"` | Determines timeline direction |
+  | Name | Type                          | Default | Description           |
+  |---------|-----------------------------------------|---------------|-----------------------|
+  | startDate * | `Date`                                  |               |  |
+  | endDate * | `Date`                                  |               |    |
+  | direction | `"horizontal"` / `"vertical"` |  `"horizontal"` | Determines timeline direction |
+  
+  **Example:**
   
   ```jsx
   import Timeline from 'react-headless-timeline';
   
   // ...
   
-  <Timeline.Provider startDate={new Date()} endDate={new Date()} direction="horizontal">
+  <Timeline.Provider startDate={startDate} endDate={endDate} direction="horizontal">
     {children}
   </Timeline.Provider>
   ```
@@ -132,13 +136,15 @@ function App() {
 * #### Timeline.Headers
 
   Provides headers and helper function to generate headers CSS styles (size and position).
+  
+  **Props:** (* - these are required)
 
-  | Property | Required? | Type       | Default value | Min. value | Description                                          |
-  | --- |-----------|------------|---------------|------------|------------------------------------------------------|
-  | cells | No        | `number`   | 2             | 2          | Determines how many headers/cells you want to render |
-  | render | Yes       | `function` |               | | Render prop function. See example below...           |
+  | Name  | Type       | Default | Description                                          |
+  | --- |------------|---------------|------------------------------------------------------|
+  | cells | `number`   | 2         | Determines how many headers/cells you want to render. For example if you have a timeline with `startDate` set to today 10AM and `endDate` set to today 4PM, by default headers will be an array with `startDate` and `endDate`. But let's say you want to display headers every 1 hour, you should then set cells to `7` - [10AM, 11AM, 12AM, 1PM, 2PM, 3PM, 4PM] |
+  | render * |  `function` |               | Render your UI inside this function. See example below...          |
 
-  Example:
+  **Example:**
 
   ```jsx
   import Timeline from 'react-headless-timeline';
@@ -163,12 +169,14 @@ function App() {
 * #### Timeline.Events
 
   Provides helper function to generate event CSS styles (size and position).
+  
+  **Props:** (* - these are required)
 
-  | Property | Required? | Type       | Default value | Min. value | Description                                          |
-  | --- |-----------|------------|---------------|------------|------------------------------------------------------|
-  | render | Yes       | `function` |               | | Render prop function. See example below...           |
+  | Name  | Type       | Default | Description                                          |
+  | --- |-----------|------------|------------------------------------------------------|
+  | render * |  `function` |   | Render your UI inside this function. See example below...          |
 
-  Example:
+  **Example:**
 
   ```jsx
   import Timeline from 'react-headless-timeline';
@@ -192,14 +200,18 @@ function App() {
   
 * #### Timeline.Indicators.CurrentTime
 
-  Provides current time indicator with update every second or full minute.
+  Provides current time indicator with updates (re-renders) every second or full minute. This component will re-render itself.
   
-  | Property | Required? | Type / value | Default value | Description |
-  | --- | --- | --- | --- | --- |
-  | updateInterval | No | `"second"` / `"minute"` | `"minute"` | Determines update interval. In most cases you'll want to use `"minute"` option to limit re-renders |
-  | render | Yes | `function` | | Render prop function. See example below... |
+  Update every full minute means update at 10:45:00, 10:46:00 and so on...
   
-  Example:
+  **Props:** (* - these are required)
+  
+  | Name  | Type | Default | Description |
+  | ---  | --- | --- | --- |
+  | updateInterval | `"second"` / `"minute"` | `"minute"` | Determines update interval. In most cases you'll want to use `"minute"` option to limit re-renders |
+  | render * | `function` | | Render your UI inside this function. See example below...   |
+  
+  **Example:**
 
   ```jsx
   import Timeline from 'react-headless-timeline';
