@@ -245,4 +245,10 @@ function App() {
 
 ---
 
-
+* [Basic horizontal](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/basic-horizontal)
+* [Basic vertical](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/basic-vertical)
+* [Horizontal with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-current-time)
+* [Horizontal with multiple events](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-multiple-events)
+* [Vertical with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-current-time)
+* [Vertical with multiple events](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-multiple-events)
+* [Advanced horizontal work log](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
