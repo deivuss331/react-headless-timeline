@@ -1,6 +1,6 @@
 import { TimelineProvider } from './context';
 import { TimelineHeaders, TimelineEvents } from './components';
-import { TimelineCurrentTime } from './components/indicators';
+import { TimelineCurrentTime, TimelineTimeIndicator } from './components/indicators';
 
 export default {
   Provider: TimelineProvider,
@@ -8,6 +8,7 @@ export default {
   Events: TimelineEvents,
   Indicators: {
     CurrentTime: TimelineCurrentTime,
+    Time: TimelineTimeIndicator,
   },
 };
 
