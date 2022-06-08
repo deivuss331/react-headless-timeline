@@ -12,7 +12,7 @@ const CONTEXT_VALUE: TimelineContextValue = {
 };
 
 describe('useTimelineProvider', () => {
-  test('Should return TimelineProvider value', () => {
+  it('Should return TimelineProvider value', () => {
     const { result } = renderHook(() => useTimelineProvider(), {
       wrapper: ContextProvider,
       initialProps: {
@@ -25,5 +25,17 @@ describe('useTimelineProvider', () => {
     ctxValueKeys.forEach((key) => {
       expect(result.current[key]).toEqual(CONTEXT_VALUE[key]);
     });
+  });
+
+  it('Should throw LibError if used outside of the TimelineContext', () => {
+    const failMsg: string = "Hasn't thrown any error!";
+
+    try {
+      renderHook(() => useTimelineProvider());
+      fail(failMsg);
+    } catch (err) {
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).not.toBe(failMsg);
+    }
   });
 });

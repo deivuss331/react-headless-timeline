@@ -14,7 +14,7 @@ interface TimelineProviderProps extends Partial<TimelineContextValue> {
 function TimelineProvider({
   startDate = CURRENT_DATE,
   endDate = NEXT_WEEK,
-  direction = 'horizontal',
+  direction,
   children,
 }: TimelineProviderProps): JSX.Element {
   return (
