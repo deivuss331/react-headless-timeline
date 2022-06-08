@@ -2,7 +2,7 @@
 
 Headless components for building custom timelines for React. Headless means it doesn't provide any UI for the timeline but only handles the logic. Supports both horizontal and vertical timelines.
 
-[![🚀 Test, release and publish](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml/badge.svg)](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml)
+[![🚀 Test, build and publish](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml/badge.svg)](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml)
 <a href="https://www.npmjs.com/package/react-headless-timeline">
  <img src="https://badgen.net/npm/v/react-headless-timeline" alt="" />
 </a>
@@ -58,11 +58,11 @@ Still not sure? Check some [examples ⬇️](#examples)
 * [Install](#install)
 * [Quick start](#quick-start)
 * [API](#api)
-  * [Timeline Provider](#timelineprovider)
-  * [Timeline Headers](#timelineheaders)
-  * [Timeline Events](#timelineevents)
-  * [Timeline Current Time Indicator](#timelineindicatorscurrenttime)
-* [Rules](#rules)
+  * [Timeline.Provider](#timelineprovider)
+  * [Timeline.Headers](#timelineheaders)
+  * [Timeline.Events](#timelineevents)
+  * [Timeline.Indicators.CurrentTime](#timelineindicatorscurrenttime)
+* [General rules](#generalrules)
 * [Examples](#examples)
 * [License](https://github.com/deivuss331/react-headless-timeline/blob/main/LICENSE)
 
@@ -141,7 +141,7 @@ function App() {
   | startDate * | `Date`                                  |               |  |
   | endDate * | `Date`                                  |               |    |
   | direction | `"horizontal"` / `"vertical"` |  `"horizontal"` | Determines timeline direction |
-  
+
   **Example:**
   
   ```jsx
@@ -162,10 +162,10 @@ function App() {
   
   **Props:** (* - these are required)
 
-  | Name  | Type       | Default | Description                                          |
-  | --- |------------|---------------|------------------------------------------------------|
-  | cells | `number`   | 2         | Determines how many headers/cells you want to render. For example if you have a timeline with `startDate` set to today 10AM and `endDate` set to today 4PM, by default headers will be an array with `startDate` and `endDate`. But let's say you want to display headers every 1 hour, you should then set cells to `7` - [10AM, 11AM, 12AM, 1PM, 2PM, 3PM, 4PM] |
-  | render * |  `function` |               | Render your UI inside this function. See example below...          |
+  | Name  | Type       | Default | Description                                                                                                                                                                                                                                                                                                                                                                               |
+  | --- |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
+  | cells | `number`   | 2         | Determines how many headers/cells you want to render. For example if you have a timeline with `startDate` set to today 10AM and `endDate` set to today 4PM, by default headers will be an array with `startDate` and `endDate`. But let's say you want to display headers every 1 hour, you should then set cells to `7` - [10AM, 11AM, 12AM, 1PM, 2PM, 3PM, 4PM]. The minimum value is 2 |
+  | render * |  `function` |               | Render your UI inside this function. See example below...                                                                                                                                                                                                                                                                                                                                 |
 
   **Example:**
 
@@ -252,7 +252,7 @@ function App() {
 
   ---
   
-### Rules
+### General rules
 
 ---
 
@@ -269,3 +269,9 @@ function App() {
 * [Vertical with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-current-time)
 * [Vertical with multiple events](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-multiple-events)
 * [Advanced horizontal work log](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
+
+### License
+
+---
+
+[MIT](https://github.com/deivuss331/react-headless-timeline/blob/main/LICENSE)
