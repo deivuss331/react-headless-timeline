@@ -154,8 +154,10 @@ function App() {
     {children}
   </Timeline.Provider>
   ```
+
+  **Other examples:** [See all ⬇️](#examples)
   
-  ---
+  ----
 
 * #### Timeline.Headers
 
@@ -187,6 +189,8 @@ function App() {
     )}
   />
   ```
+
+  **Other examples:** [See all ⬇️](#examples)
   
   ---
 
@@ -219,6 +223,8 @@ function App() {
     )}
   />
   ```
+
+  **Other examples:** [See all ⬇️](#examples)
   
   ---
   
@@ -251,7 +257,13 @@ function App() {
   />
   ```
 
-  ---
+  **Other examples:**
+  * [Horizontal with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-current-time)
+  * [Horizontal with multiple events and time indicators](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-time-indicator)
+  * [Vertical with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-current-time)
+  * [Advanced horizontal work log](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
+
+    ---
 
 * #### Timeline.Indicators.Time
 
@@ -280,6 +292,10 @@ function App() {
     )}
   />
   ```
+
+  **Other examples:**
+  * [Horizontal with multiple events and time indicators](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-time-indicator)
+
 
   ---
   
