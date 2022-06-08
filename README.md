@@ -62,7 +62,8 @@ Still not sure? Check some [examples ⬇️](#examples)
   * [Timeline.Headers](#timelineheaders)
   * [Timeline.Events](#timelineevents)
   * [Timeline.Indicators.CurrentTime](#timelineindicatorscurrenttime)
-* [General rules](#generalrules)
+  * [Timeline.Indicators.Time](#timelineindicatorstime)
+* [General rules](#general-rules)
 * [Examples](#examples)
 * [License](https://github.com/deivuss331/react-headless-timeline/blob/main/LICENSE)
 
@@ -251,6 +252,36 @@ function App() {
   ```
 
   ---
+
+* #### Timeline.Indicators.Time
+
+  This indicator exposes function to position your component properly. It's useful for events without end date.
+
+  **Props:** (* - these are required)
+
+  | Name  | Type | Default | Description |
+    | ---  | --- | --- | --- |
+  | render * | `function` | | Render your UI inside this function. See example below...   |
+
+  **Example:**
+
+  ```jsx
+  import Timeline from 'react-headless-timeline';
+  
+  // ...
+  
+  <Timeline.Indicators.Time
+    render={({ getIndicatorStyles }) => (
+      <div style={{ height: '100%', ...getIndicatorStyles(date) }}>
+        <StyledHeader>
+          {label}
+        </StyledHeader>
+      </div>
+    )}
+  />
+  ```
+
+  ---
   
 ### General rules
 
@@ -266,6 +297,7 @@ function App() {
 * [Basic vertical](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/basic-vertical)
 * [Horizontal with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-current-time)
 * [Horizontal with multiple events](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-multiple-events)
+* [Horizontal with multiple events and time indicators](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-time-indicator)
 * [Vertical with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-current-time)
 * [Vertical with multiple events](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-multiple-events)
 * [Advanced horizontal work log](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
