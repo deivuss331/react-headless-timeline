@@ -2,7 +2,9 @@ import useTimelineProvider from './useTimelineProvider';
 import { differenceInMilliseconds } from 'date-fns';
 
 /**
- * Calculates item offset - top or left
+ * Calculates item offset
+ * - CSS `top` property for vertical timeline
+ * - CSS `left` property for horizontal timeline
  */
 const useOffsetCalculator = () => {
   const timeline = useTimelineProvider();

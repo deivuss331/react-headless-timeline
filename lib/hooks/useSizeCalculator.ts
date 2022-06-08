@@ -3,7 +3,9 @@ import { differenceInMilliseconds } from 'date-fns';
 import type { TimelineEvent } from '../types';
 
 /**
- * Calculates item size - width or height
+ * Calculates item size
+ * - CSS `height` property for vertical timeline
+ * - CSS `width` property for horizontal timeline
  */
 const useSizeCalculator = () => {
   const timeline = useTimelineProvider();

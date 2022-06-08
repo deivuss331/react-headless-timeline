@@ -1,10 +1,10 @@
 import { add } from 'date-fns';
 import { useTimelineProvider, useOffsetCalculator } from '../hooks';
 
+const MILLISECONDS_IN_SECOND: number = 1000;
+
 const CELLS_MIN: number = 2;
 const CELLS_DEFAULT: number = CELLS_MIN;
-
-const MILLISECONDS_IN_SECOND: number = 1000;
 
 interface RenderProps {
   headers: Date[];
@@ -20,11 +20,11 @@ function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps)
   const { startDate, endDate, direction } = useTimelineProvider();
   const calcOffset = useOffsetCalculator();
 
-  const isCellsQtyValid: boolean = cells > CELLS_MIN;
+  const hasMoreCellsThanRequired: boolean = cells > CELLS_MIN;
   const isHorizontalTimeline: boolean = direction === 'horizontal';
 
   const cellSizeMs: number = Math.round((endDate.getTime() - startDate.getTime()) / (cells - 1));
-  const headers = isCellsQtyValid
+  const headers = hasMoreCellsThanRequired
     ? new Array(cells).fill(null).reduce<Date[]>((dates, _, index) => {
         dates.push(add(startDate, { seconds: (cellSizeMs / MILLISECONDS_IN_SECOND) * index }));
         return dates;
