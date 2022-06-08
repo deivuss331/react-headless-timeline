@@ -2,6 +2,23 @@
 
 Headless components for building custom timelines for React. Headless means it doesn't provide any UI for the timeline but only handles the logic. Supports both horizontal and vertical timelines.
 
+[![🚀 Test, release and publish](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml/badge.svg)](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml)
+<a href="https://www.npmjs.com/package/react-headless-timeline">
+ <img src="https://badgen.net/npm/v/react-headless-timeline" alt="" />
+</a>
+<a href="https://www.npmjs.com/package/react-headless-timeline">
+ <img src="https://img.shields.io/npm/dt/react-headless-timeline" alt="" />
+ </a>
+ <a href="https://bundlephobia.com/package/react-headless-timeline@latest">
+ <img src="https://badgen.net/bundlephobia/minzip/react-headless-timeline@latest" alt="" />
+ </a>
+ <a href="https://bundlephobia.com/package/react-headless-timeline@latest">
+ <img src="https://badgen.net/bundlephobia/tree-shaking/react-headless-timeline@latest" alt="" />
+ </a>
+ <a href="https://www.npmjs.com/package/react-headless-timeline">
+ <img src="https://badgen.net/npm/license/react-headless-timeline" alt="" />
+</a>
+
 <div style="display: grid; place-items: center;">
  <div style="width: 100%; max-width: 1920px;">
   <img src="https://raw.githubusercontent.com/deivuss331/react-headless-timeline/main/react-headless-timeline-demo.png" alt="React Headless Timeline" />
