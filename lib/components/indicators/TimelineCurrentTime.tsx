@@ -4,7 +4,9 @@ import { useOffsetCalculator, useTimelineProvider } from '../../hooks';
 
 const MILLISECONDS_IN_SECOND: number = 1000;
 const SECONDS_IN_MINUTE: number = 60;
-const MINUTE_AS_MILLISECONDS: number = SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
+const MILLISECONDS_IN_MINUTE: number = SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
+
+const UPDATE_INTERVAL_DEFAULT: UpdateInterval = 'minute';
 
 type UpdateInterval = 'second' | 'minute';
 
@@ -18,7 +20,10 @@ interface TimelineCurrentTimeProps {
   render: (props: RenderProps) => JSX.Element;
 }
 
-function TimelineCurrentTime({ updateInterval = 'minute', render }: TimelineCurrentTimeProps): JSX.Element {
+function TimelineCurrentTime({
+  updateInterval = UPDATE_INTERVAL_DEFAULT,
+  render,
+}: TimelineCurrentTimeProps): JSX.Element {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
   const { direction } = useTimelineProvider();
   const calcOffset = useOffsetCalculator();
@@ -42,7 +47,7 @@ function TimelineCurrentTime({ updateInterval = 'minute', render }: TimelineCurr
     const timeout: NodeJS.Timeout | undefined = isSecondInterval
       ? undefined
       : setTimeout(() => {
-          interval = setInterval(() => setCurrentTime(new Date()), MINUTE_AS_MILLISECONDS);
+          interval = setInterval(() => setCurrentTime(new Date()), MILLISECONDS_IN_MINUTE);
           setCurrentTime(new Date());
         }, nowToNextFullMinuteInMilliseconds);
 
