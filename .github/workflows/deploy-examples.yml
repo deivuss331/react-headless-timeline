@@ -1,0 +1,31 @@
+name: 🧪 Build and deploy examples
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Build & deploy example 'advanced-horizontal-worklog'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./examples/advanced-horizontal-worklog
+    steps:
+      - name: 📝 Checkout
+        uses: actions/checkout@v3
+      - name: 🟢 Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org
+      - name: 📦 Install dependencies
+        run: npm ci
+      - name: 🏗 Build
+        run: npm run build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
+          target-folder: advanced-horizontal-worklog-example
