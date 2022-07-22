@@ -1,5 +1,4 @@
 import React, { createContext } from 'react';
-import type { Optional } from 'utility-types';
 import type { TimelineDirection } from '../types';
 import { DEFAULT_TIMELINE_DIRECTION } from '../config/constants';
 
@@ -11,8 +10,11 @@ export interface TimelineContextValue {
 
 export const TimelineCtx = createContext<TimelineContextValue | undefined>(undefined);
 
-interface IProviderProps extends Optional<TimelineContextValue, 'direction'> {
+interface IProviderProps {
   children: React.ReactElement;
+  startDate: TimelineContextValue['startDate'];
+  endDate: TimelineContextValue['endDate'];
+  direction?: TimelineContextValue['direction'];
 }
 
 function TimelineProvider({
