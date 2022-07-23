@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Build & deploy example 'advanced-horizontal-worklog'
+    name: Build & deploy 'advanced-horizontal-worklog' example
     runs-on: ubuntu-latest
     defaults:
       run:
