@@ -2,7 +2,7 @@
   "name": "advanced-horizontal-worklog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://deivuss331.github.io/react-headless-timeline/advanced-horizontal-worklog-example/",
+  "homepage": "/react-headless-timeline/",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
