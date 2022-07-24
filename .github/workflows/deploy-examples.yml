@@ -28,4 +28,3 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: examples/advanced-horizontal-worklog/build
-          target-folder: advanced-horizontal-worklog-example
