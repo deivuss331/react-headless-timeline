@@ -316,7 +316,9 @@ function App() {
 * [Horizontal with multiple events and time indicators](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/horizontal-time-indicator)
 * [Vertical with current time indicator](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-current-time)
 * [Vertical with multiple events](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/vertical-multiple-events)
-* [Advanced horizontal work log](https://githubbox.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
+* Advanced horizontal work log:
+  * [Source code](https://github.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
+  * [Live example](https://deivuss331.github.io/react-headless-timeline/)
 
 ### License
 
