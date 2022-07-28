@@ -13,10 +13,10 @@ interface RenderProps {
 
 interface TimelineHeaderProps {
   cells?: number;
-  render: (props: RenderProps) => JSX.Element;
+  render: (props: RenderProps) => JSX.Element | null;
 }
 
-function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps): JSX.Element {
+function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps) {
   const { startDate, endDate, direction } = useTimelineProvider();
   const calcOffset = useOffsetCalculator();
 

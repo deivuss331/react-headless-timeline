@@ -6,10 +6,10 @@ interface RenderProps {
 }
 
 interface TimelineEventsProps {
-  render: (props: RenderProps) => JSX.Element;
+  render: (props: RenderProps) => JSX.Element | null;
 }
 
-function TimelineEvents({ render }: TimelineEventsProps): JSX.Element {
+function TimelineEvents({ render }: TimelineEventsProps) {
   const { direction } = useTimelineProvider();
   const calcOffset = useOffsetCalculator();
   const calcSize = useSizeCalculator();

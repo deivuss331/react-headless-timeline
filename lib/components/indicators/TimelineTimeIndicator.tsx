@@ -5,10 +5,10 @@ interface RenderProps {
 }
 
 interface TimelineTimeIndicatorProps {
-  render: (props: RenderProps) => JSX.Element;
+  render: (props: RenderProps) => JSX.Element | null;
 }
 
-function TimelineTimeIndicator({ render }: TimelineTimeIndicatorProps): JSX.Element {
+function TimelineTimeIndicator({ render }: TimelineTimeIndicatorProps) {
   const { direction } = useTimelineProvider();
   const calcOffset = useOffsetCalculator();
 
