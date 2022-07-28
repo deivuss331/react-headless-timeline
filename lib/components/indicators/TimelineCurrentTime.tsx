@@ -17,13 +17,10 @@ interface RenderProps {
 
 interface TimelineCurrentTimeProps {
   updateInterval?: UpdateInterval;
-  render: (props: RenderProps) => JSX.Element;
+  render: (props: RenderProps) => JSX.Element | null;
 }
 
-function TimelineCurrentTime({
-  updateInterval = UPDATE_INTERVAL_DEFAULT,
-  render,
-}: TimelineCurrentTimeProps): JSX.Element {
+function TimelineCurrentTime({ updateInterval = UPDATE_INTERVAL_DEFAULT, render }: TimelineCurrentTimeProps) {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
   const { direction } = useTimelineProvider();
   const calcOffset = useOffsetCalculator();
