@@ -1,6 +1,6 @@
 {
   "name": "react-headless-timeline",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "⚡️ Headless components for building custom timelines for React",
   "main": "dist/react-headless-timeline.min.js",
   "module": "dist/react-headless-timeline.esm.js",
