@@ -7,7 +7,7 @@ const useTimelineProvider = (): TimelineContextValue => {
   const value: TimelineContextValue | undefined = useContext(TimelineCtx);
 
   if (!value) {
-    throw new LibError('You forgot to wrap your timeline components with TimelineProvider!');
+    throw new LibError('"useTimelineContext" hook cannot be used outside the Timeline context!');
   }
 
   return value;

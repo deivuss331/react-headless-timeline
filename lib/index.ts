@@ -15,3 +15,5 @@ export default {
 export * from './context';
 export * from './components';
 export * from './components/indicators';
+
+export { useTimelineProvider as useTimelineContext } from './hooks';
