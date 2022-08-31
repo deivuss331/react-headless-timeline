@@ -1,47 +1,43 @@
+import type { CSSProperties } from 'react';
 import { useState, useEffect } from 'react';
 import { addMinutes, differenceInMilliseconds, roundToNearestMinutes } from 'date-fns';
-import { useOffsetCalculator, useTimelineProvider } from '../../hooks';
+import { useOffsetCalculator } from 'lib/hooks';
+import { useTimelineContext } from 'lib/components/TimelineProvider';
 
-const MILLISECONDS_IN_SECOND: number = 1000;
-const SECONDS_IN_MINUTE: number = 60;
-const MILLISECONDS_IN_MINUTE: number = SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
+const MILLISECONDS_IN_SECOND = 1000;
+const SECONDS_IN_MINUTE = 60;
+const MILLISECONDS_IN_MINUTE = SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
 
-const UPDATE_INTERVAL_DEFAULT: UpdateInterval = 'minute';
-
-type UpdateInterval = 'second' | 'minute';
-
-interface RenderProps {
-  currentTime: Date;
-  styles: React.CSSProperties;
-}
+const DEFAULT_UPDATE_INTERVAL: NonNullable<TimelineCurrentTimeProps['updateInterval']> = 'minute';
 
 interface TimelineCurrentTimeProps {
-  updateInterval?: UpdateInterval;
-  render: (props: RenderProps) => JSX.Element | null;
+  updateInterval?: 'second' | 'minute';
+  render: (props: { currentTime: Date; styles: CSSProperties }) => JSX.Element | null;
 }
 
-function TimelineCurrentTime({ updateInterval = UPDATE_INTERVAL_DEFAULT, render }: TimelineCurrentTimeProps) {
-  const [currentTime, setCurrentTime] = useState<Date>(new Date());
-  const { direction } = useTimelineProvider();
+export default function TimelineCurrentTime({
+  updateInterval = DEFAULT_UPDATE_INTERVAL,
+  render,
+}: TimelineCurrentTimeProps) {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const { direction } = useTimelineContext();
   const calcOffset = useOffsetCalculator();
 
-  const isSecondInterval: boolean = updateInterval === 'second';
-  const isHorizontalTimeline: boolean = direction === 'horizontal';
+  const isSecondInterval = updateInterval === 'second';
+  const isHorizontalTimeline = direction === 'horizontal';
 
   useEffect(() => {
-    const now: Date = new Date();
-    const nearestMinFromNow: Date = roundToNearestMinutes(now);
+    const now = new Date();
+    const nearestMinFromNow = roundToNearestMinutes(now);
     const nextFullMinuteFromNow =
       +nearestMinFromNow < +now ? addMinutes(nearestMinFromNow, 1) : nearestMinFromNow;
-    const nowToNextFullMinuteInMilliseconds: number = Math.abs(
-      differenceInMilliseconds(now, nextFullMinuteFromNow),
-    );
+    const nowToNextFullMinuteInMilliseconds = Math.abs(differenceInMilliseconds(now, nextFullMinuteFromNow));
 
-    let interval: NodeJS.Timer | undefined = isSecondInterval
+    let interval = isSecondInterval
       ? setInterval(() => setCurrentTime(new Date()), MILLISECONDS_IN_SECOND)
       : undefined;
 
-    const timeout: NodeJS.Timeout | undefined = isSecondInterval
+    const timeout = isSecondInterval
       ? undefined
       : setTimeout(() => {
           interval = setInterval(() => setCurrentTime(new Date()), MILLISECONDS_IN_MINUTE);
@@ -54,12 +50,10 @@ function TimelineCurrentTime({ updateInterval = UPDATE_INTERVAL_DEFAULT, render 
     };
   }, [updateInterval]);
 
-  const styles: React.CSSProperties = {
+  const styles: CSSProperties = {
     position: 'absolute',
     ...(isHorizontalTimeline ? { left: calcOffset(currentTime) } : { top: calcOffset(currentTime) }),
   };
 
   return render({ currentTime, styles });
 }
-
-export default TimelineCurrentTime;

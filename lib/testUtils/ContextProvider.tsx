@@ -1,11 +1,13 @@
-import React from 'react';
 import type { WrapperComponent } from '@testing-library/react-hooks';
+import type { TimelineContextValue } from 'lib/components/TimelineProvider';
+import React from 'react';
 import { add } from 'date-fns';
-import { TimelineProvider as Provider } from '../context';
-import type { TimelineContextValue } from '../context/TimelineProvider';
+import { TimelineProvider as Provider } from 'lib/components';
 
-const CURRENT_DATE: Date = new Date();
-const NEXT_WEEK: Date = add(CURRENT_DATE, { days: 7 });
+const DAYS_IN_WEEK = 7;
+
+const CURRENT_DATE = new Date();
+const NEXT_WEEK = add(CURRENT_DATE, { days: DAYS_IN_WEEK });
 
 interface TimelineProviderProps extends Partial<TimelineContextValue> {
   children?: React.ReactElement;
@@ -16,7 +18,7 @@ function TimelineProvider({
   endDate = NEXT_WEEK,
   direction,
   children,
-}: TimelineProviderProps): JSX.Element {
+}: TimelineProviderProps) {
   return (
     <Provider startDate={startDate} endDate={endDate} direction={direction}>
       {children || <span />}

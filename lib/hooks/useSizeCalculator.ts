@@ -1,6 +1,6 @@
-import useTimelineProvider from './useTimelineProvider';
+import type { TimelineEvent } from 'lib/types';
 import { differenceInMilliseconds } from 'date-fns';
-import type { TimelineEvent } from '../types';
+import { useTimelineContext } from 'lib/components/TimelineProvider';
 
 /**
  * Calculates item size
@@ -8,14 +8,12 @@ import type { TimelineEvent } from '../types';
  * - CSS `width` property for horizontal timeline
  */
 const useSizeCalculator = () => {
-  const timeline = useTimelineProvider();
+  const timeline = useTimelineContext();
 
   return ({ startDate, endDate }: TimelineEvent) => {
-    const timelineDatesDiff: number = Math.abs(
-      differenceInMilliseconds(timeline.endDate, timeline.startDate),
-    );
-    const eventDatesDiff: number = Math.abs(differenceInMilliseconds(endDate, startDate));
-    const sizePercentage: number = (eventDatesDiff * 100) / timelineDatesDiff;
+    const timelineDatesDiff = Math.abs(differenceInMilliseconds(timeline.endDate, timeline.startDate));
+    const eventDatesDiff = Math.abs(differenceInMilliseconds(endDate, startDate));
+    const sizePercentage = (eventDatesDiff * 100) / timelineDatesDiff;
 
     return `${sizePercentage}%`;
   };

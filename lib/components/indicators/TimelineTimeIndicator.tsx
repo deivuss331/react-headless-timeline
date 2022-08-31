@@ -1,25 +1,21 @@
-import { useOffsetCalculator, useTimelineProvider } from '../../hooks';
-
-interface RenderProps {
-  getIndicatorStyles: (date: Date) => React.CSSProperties;
-}
+import type { CSSProperties } from 'react';
+import { useOffsetCalculator } from 'lib/hooks';
+import { useTimelineContext } from 'lib/components/TimelineProvider';
 
 interface TimelineTimeIndicatorProps {
-  render: (props: RenderProps) => JSX.Element | null;
+  render: (props: { getIndicatorStyles: (date: Date) => CSSProperties }) => JSX.Element | null;
 }
 
-function TimelineTimeIndicator({ render }: TimelineTimeIndicatorProps) {
-  const { direction } = useTimelineProvider();
+export default function TimelineTimeIndicator({ render }: TimelineTimeIndicatorProps) {
+  const { direction } = useTimelineContext();
   const calcOffset = useOffsetCalculator();
 
-  const isHorizontalTimeline: boolean = direction === 'horizontal';
+  const isHorizontalTimeline = direction === 'horizontal';
 
-  const getIndicatorStyles = (date: Date): React.CSSProperties => ({
+  const getIndicatorStyles = (date: Date): CSSProperties => ({
     position: 'absolute',
     ...(isHorizontalTimeline ? { left: calcOffset(date) } : { top: calcOffset(date) }),
   });
 
   return render({ getIndicatorStyles });
 }
-
-export default TimelineTimeIndicator;

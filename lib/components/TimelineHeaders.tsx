@@ -1,29 +1,29 @@
+import type { CSSProperties } from 'react';
 import { add } from 'date-fns';
-import { useTimelineProvider, useOffsetCalculator } from '../hooks';
+import { useOffsetCalculator } from 'lib/hooks';
+import { useTimelineContext } from 'lib/components/TimelineProvider';
 
-const MILLISECONDS_IN_SECOND: number = 1000;
+const MILLISECONDS_IN_SECOND = 1000;
 
-const CELLS_MIN: number = 2;
-const CELLS_DEFAULT: number = CELLS_MIN;
-
-interface RenderProps {
-  headers: Date[];
-  getHeaderStyles: (header: Date) => React.CSSProperties;
-}
+const MIN_CELLS_QTY = 2;
+const DEFAULT_CELLS_QTY = MIN_CELLS_QTY;
 
 interface TimelineHeaderProps {
   cells?: number;
-  render: (props: RenderProps) => JSX.Element | null;
+  render: (props: {
+    headers: Date[];
+    getHeaderStyles: (header: Date) => CSSProperties;
+  }) => JSX.Element | null;
 }
 
-function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps) {
-  const { startDate, endDate, direction } = useTimelineProvider();
+export default function TimelineHeaders({ cells = DEFAULT_CELLS_QTY, render }: TimelineHeaderProps) {
+  const { startDate, endDate, direction } = useTimelineContext();
   const calcOffset = useOffsetCalculator();
 
-  const hasMoreCellsThanRequired: boolean = cells > CELLS_MIN;
-  const isHorizontalTimeline: boolean = direction === 'horizontal';
+  const hasMoreCellsThanRequired = cells > MIN_CELLS_QTY;
+  const isHorizontalTimeline = direction === 'horizontal';
 
-  const cellSizeMs: number = Math.round((endDate.getTime() - startDate.getTime()) / (cells - 1));
+  const cellSizeMs = Math.round((endDate.getTime() - startDate.getTime()) / (cells - 1));
   const headers = hasMoreCellsThanRequired
     ? new Array(cells).fill(null).reduce<Date[]>((dates, _, index) => {
         dates.push(add(startDate, { seconds: (cellSizeMs / MILLISECONDS_IN_SECOND) * index }));
@@ -31,12 +31,10 @@ function TimelineHeaders({ cells = CELLS_DEFAULT, render }: TimelineHeaderProps)
       }, [])
     : [startDate, endDate];
 
-  const getHeaderStyles = (header: Date): React.CSSProperties => ({
+  const getHeaderStyles = (header: Date): CSSProperties => ({
     position: 'absolute',
     ...(isHorizontalTimeline ? { left: calcOffset(header) } : { top: calcOffset(header) }),
   });
 
   return render({ headers, getHeaderStyles });
 }
-
-export default TimelineHeaders;

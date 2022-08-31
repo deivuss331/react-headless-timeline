@@ -1,22 +1,20 @@
-import { useOffsetCalculator, useSizeCalculator, useTimelineProvider } from '../hooks';
-import type { TimelineEvent } from '../types';
-
-interface RenderProps {
-  getEventStyles: (evt: TimelineEvent) => React.CSSProperties;
-}
+import type { CSSProperties } from 'react';
+import type { TimelineEvent } from 'lib/types';
+import { useOffsetCalculator, useSizeCalculator } from 'lib/hooks';
+import { useTimelineContext } from 'lib/components/TimelineProvider';
 
 interface TimelineEventsProps {
-  render: (props: RenderProps) => JSX.Element | null;
+  render: (props: { getEventStyles: (evt: TimelineEvent) => CSSProperties }) => JSX.Element | null;
 }
 
-function TimelineEvents({ render }: TimelineEventsProps) {
-  const { direction } = useTimelineProvider();
+export default function TimelineEvents({ render }: TimelineEventsProps) {
+  const { direction } = useTimelineContext();
   const calcOffset = useOffsetCalculator();
   const calcSize = useSizeCalculator();
 
-  const isHorizontalTimeline: boolean = direction === 'horizontal';
+  const isHorizontalTimeline = direction === 'horizontal';
 
-  const getEventStyles = (evt: TimelineEvent): React.CSSProperties => ({
+  const getEventStyles = (evt: TimelineEvent): CSSProperties => ({
     position: 'absolute',
     ...(isHorizontalTimeline
       ? { width: calcSize(evt), left: calcOffset(evt.startDate) }
@@ -25,5 +23,3 @@ function TimelineEvents({ render }: TimelineEventsProps) {
 
   return render({ getEventStyles });
 }
-
-export default TimelineEvents;

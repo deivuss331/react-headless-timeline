@@ -1,13 +1,15 @@
+import type { CSSProperties } from 'react';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { set } from 'date-fns';
-import { ContextProvider } from '../../../testUtils';
+import { ContextProvider } from 'lib/testUtils';
 import TimelineCurrentTime from '../TimelineCurrentTime';
 
-const STYLES_CONSUMER_TEST_ID: string = 'styles-consumer';
-const CURRENT_DATE: Date = new Date();
-const TODAY_START: Date = set(CURRENT_DATE, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }); // Today 00:00:00
-const TODAY_END: Date = set(CURRENT_DATE, { hours: 23, minutes: 59, seconds: 59, milliseconds: 0 }); // Today 23:59:59
+const STYLES_CONSUMER_TEST_ID = 'styles-consumer';
+
+const CURRENT_DATE = new Date();
+const TODAY_START = set(CURRENT_DATE, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }); // Today 00:00:00
+const TODAY_END = set(CURRENT_DATE, { hours: 23, minutes: 59, seconds: 59, milliseconds: 0 }); // Today 23:59:59
 
 describe('TimelineCurrentTime', () => {
   it('Returns correct CSS props for horizontal timeline', () => {
@@ -37,10 +39,6 @@ describe('TimelineCurrentTime', () => {
   });
 });
 
-interface StylesConsumerProps {
-  styles: React.CSSProperties;
-}
-
-function StylesConsumer({ styles }: StylesConsumerProps): JSX.Element {
+function StylesConsumer({ styles }: { styles: CSSProperties }) {
   return <span style={styles} data-testid={STYLES_CONSUMER_TEST_ID} />;
 }

@@ -27,4 +27,7 @@ export default {
       statements: 85,
     },
   },
+  roots: ['<rootDir>', 'lib/'],
+  modulePaths: ['<rootDir>', 'lib/'],
+  moduleDirectories: ['node_modules'],
 };

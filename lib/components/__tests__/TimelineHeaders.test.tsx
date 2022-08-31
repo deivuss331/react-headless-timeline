@@ -1,15 +1,16 @@
+import type { CSSProperties } from 'react';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { set } from 'date-fns';
-import { ContextProvider } from '../../testUtils';
+import { ContextProvider } from 'lib/testUtils';
 import TimelineHeaders from '../TimelineHeaders';
 
-const STYLES_CONSUMER_TEST_ID: string = 'styles-consumer';
-const CELLS_CONSUMER_TEST_ID: string = 'cells-consumer';
+const STYLES_CONSUMER_TEST_ID = 'styles-consumer';
+const CELLS_CONSUMER_TEST_ID = 'cells-consumer';
 
-const CURRENT_DATE: Date = new Date();
-const TODAY_START: Date = set(CURRENT_DATE, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }); // Today 00:00:00
-const TODAY_END: Date = set(CURRENT_DATE, { hours: 23, minutes: 59, seconds: 59, milliseconds: 0 }); // Today 23:59:59
+const CURRENT_DATE = new Date();
+const TODAY_START = set(CURRENT_DATE, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }); // Today 00:00:00
+const TODAY_END = set(CURRENT_DATE, { hours: 23, minutes: 59, seconds: 59, milliseconds: 0 }); // Today 23:59:59
 
 const EXAMPLE_EVENT = {
   startDate: set(CURRENT_DATE, { hours: 10, minutes: 0, seconds: 30 }), // Today 10:00:30
@@ -52,7 +53,7 @@ describe('TimelineHeaders', () => {
   });
 
   it('Returns correct amount of headers', () => {
-    const CELLS_QTY: number = 10;
+    const CELLS_QTY = 10;
 
     const { getByTestId } = render(
       <ContextProvider startDate={TODAY_START} endDate={TODAY_END} direction="vertical">
@@ -67,18 +68,10 @@ describe('TimelineHeaders', () => {
   });
 });
 
-interface StylesConsumerProps {
-  styles: React.CSSProperties;
-}
-
-function StylesConsumer({ styles }: StylesConsumerProps): JSX.Element {
+function StylesConsumer({ styles }: { styles: CSSProperties }) {
   return <span style={styles} data-testid={STYLES_CONSUMER_TEST_ID} />;
 }
 
-interface CellsConsumerProps {
-  headers: Date[];
-}
-
-function CellsConsumer({ headers }: CellsConsumerProps): JSX.Element {
+function CellsConsumer({ headers }: { headers: Date[] }) {
   return <span data-cells-qty={headers.length} data-testid={CELLS_CONSUMER_TEST_ID} />;
 }
