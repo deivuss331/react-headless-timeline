@@ -1,6 +1,5 @@
-import { TimelineProvider } from './context';
-import { TimelineHeaders, TimelineEvents } from './components';
-import { TimelineCurrentTime, TimelineTimeIndicator } from './components/indicators';
+import { TimelineProvider, TimelineHeaders, TimelineEvents } from 'lib/components';
+import { TimelineCurrentTime, TimelineTimeIndicator } from 'lib/components/indicators';
 
 export default {
   Provider: TimelineProvider,
@@ -12,8 +11,7 @@ export default {
   },
 };
 
-export * from './context';
-export * from './components';
-export * from './components/indicators';
+export * from 'lib/components';
+export * from 'lib/components/indicators';
 
-export { useTimelineProvider as useTimelineContext } from './hooks';
+export { useTimelineContext } from 'lib/components/TimelineProvider';
