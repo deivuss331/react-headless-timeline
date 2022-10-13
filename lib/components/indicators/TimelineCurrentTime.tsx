@@ -33,15 +33,17 @@ export default function TimelineCurrentTime({
       +nearestMinFromNow < +now ? addMinutes(nearestMinFromNow, 1) : nearestMinFromNow;
     const nowToNextFullMinuteInMilliseconds = Math.abs(differenceInMilliseconds(now, nextFullMinuteFromNow));
 
+    const updateCurrentTime = () => setCurrentTime(roundToNearestMinutes(new Date()));
+
     let interval = isSecondInterval
-      ? setInterval(() => setCurrentTime(new Date()), MILLISECONDS_IN_SECOND)
+      ? setInterval(updateCurrentTime, MILLISECONDS_IN_SECOND)
       : undefined;
 
     const timeout = isSecondInterval
       ? undefined
       : setTimeout(() => {
-          interval = setInterval(() => setCurrentTime(new Date()), MILLISECONDS_IN_MINUTE);
-          setCurrentTime(new Date());
+          interval = setInterval(updateCurrentTime, MILLISECONDS_IN_MINUTE);
+          updateCurrentTime();
         }, nowToNextFullMinuteInMilliseconds);
 
     return () => {
