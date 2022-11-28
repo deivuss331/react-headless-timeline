@@ -320,6 +320,15 @@ function App() {
   * [Source code](https://github.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
   * [Live example](https://deivuss331.github.io/react-headless-timeline/)
 
+### Roadmap 🗺
+
+---
+
+* Create detailed documentation
+* Add more advanced examples of usage of `react-headless-timeline`
+* (?) Add support for overflow timelines
+* (?) Add possibility to create virtualized timelines
+
 ### License
 
 ---
