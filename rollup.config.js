@@ -49,8 +49,11 @@ export default {
     }),
     license({
       banner: `
+        Copyright (c) ${author}.
+        
+        This source code is licensed under the MIT license.
+        
         ${name} v${version}
-        Copyright ${author}
       `,
     }),
   ],
