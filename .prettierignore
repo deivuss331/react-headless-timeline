@@ -1,0 +1,6 @@
+.github/
+.husky/
+coverage/
+dist/
+examples/
+node_modules/

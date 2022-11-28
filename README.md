@@ -1,6 +1,6 @@
 # ⚡️ React Headless Timeline
 
-Headless components for building custom timelines for React. Headless means it doesn't provide any UI for the timeline but only handles the logic. Supports both horizontal and vertical timelines.
+Headless components for building custom timelines for React. Headless means it doesn't provide any UI or styles for the timeline but only handles the logic. Supports both horizontal and vertical timelines.
 
 [![🚀 Test, build and publish](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml/badge.svg)](https://github.com/deivuss331/react-headless-timeline/actions/workflows/test-and-publish.yml)
 <a href="https://www.npmjs.com/package/react-headless-timeline">
@@ -25,31 +25,32 @@ Headless components for building custom timelines for React. Headless means it d
  </div>
 </div>
 
-### Features
+### Features ✨
 
 ---
 
 * ⚡️ Highly performant and efficient
 * 🔒 Type safe - written in TypeScript
-* 🫧 Doesn't render any UI - it's totally up to you how you're going to style your timeline
+* 🫧 Doesn't render any UI nor styles - it's totally up to you how you're going to style your timeline
+* 🧩 Supports horizontal and vertical timelines
 * 🏃‍ Small bundle size
 
-### Overview
+### Overview 👓
 
 ---
 
-See what library **does** and what **doesn't** for you to decide whether it's a good fit for you or not.
+See what this library **does** and **doesn't** for you and decide whether it's a good fit for you or not.
 
 **👍 What it does for you:**
-* Handles the timeline logic
-* Helps you render timeline components in correct position and size
+* It handles the timeline logic
+* It helps you render timeline components in correct position and size
 
 **👎 What it doesn't for you:**
-* It doesn't provide any pre-made UI components for you (no need to overwrite any styles to make timeline looks like in designer's dream)
+* It doesn't provide any pre-styled UI components for you (no need to overwrite styles to make timeline looks like in designer's dream)
 
 Still not sure? Check some [examples ⬇️](#examples)
 
-### 📖 Content
+### Content 📖
 
 ---
 
@@ -67,7 +68,7 @@ Still not sure? Check some [examples ⬇️](#examples)
 * [Examples](#examples)
 * [License](https://github.com/deivuss331/react-headless-timeline/blob/main/LICENSE)
 
-### Install
+### Install 🔌
 
 ---
 
@@ -75,7 +76,7 @@ Still not sure? Check some [examples ⬇️](#examples)
 npm install react-headless-timeline
 ```
 
-### Quick start
+### Quick start 👨‍💻
 
 ---
 
@@ -127,7 +128,7 @@ function App() {
 }
 ```
 
-### API
+### API 📚
 
 ---
 
@@ -299,13 +300,13 @@ function App() {
 
   ---
   
-### General rules
+### General rules 📝
 
 ---
 
 * You should use CSS `box-sizing: border-box` on your timeline components to prevent sizing bugs.
 
-### Examples
+### Examples 🧩
 
 ---
 
@@ -320,7 +321,16 @@ function App() {
   * [Source code](https://github.com/deivuss331/react-headless-timeline/tree/main/examples/advanced-horizontal-worklog)
   * [Live example](https://deivuss331.github.io/react-headless-timeline/)
 
-### License
+### Roadmap 🗺
+
+---
+
+* Create detailed documentation
+* Add more advanced examples of usage of `react-headless-timeline`
+* (?) Add support for overflow timelines
+* (?) Add possibility to create virtualized timelines
+
+### License 📜
 
 ---
 
