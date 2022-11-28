@@ -10,11 +10,14 @@
     "test": "jest",
     "build": "rimraf dist && NODE_ENV=production rollup -c && npm run build:types",
     "build:types": "rimraf dist/types && tsc --project ./tsconfig.json && replace 'import type' 'import' ./dist/types -r --silent && replace 'export type' 'export' ./dist/types -r --silent && replace 'lib/' '../' ./dist/types/*/*.* -r --silent && replace 'lib/' './' ./dist/types -r --silent",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@testing-library/react": "^12.1.5",
     "@testing-library/react-hooks": "^8.0.0",
@@ -25,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "eslint": "^8.16.0",
+    "husky": "^8.0.0",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "prettier": "^2.6.2",
