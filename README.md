@@ -138,10 +138,10 @@ function App() {
   
   **Props:** (* - these are required)
 
-  | Name | Type                          | Default | Description           |
-  |---------|-----------------------------------------|---------------|-----------------------|
-  | startDate * | `Date`                                  |               |  |
-  | endDate * | `Date`                                  |               |    |
+  | Name | Type                          | Default | Description                   |
+  |---------|-----------------------------------------|-------------------------------|-----------------------|
+  | startDate * | `Date`                                  |               | **Should be memoized**        |
+  | endDate * | `Date`                                  |               | **Should be memoized**                               |
   | direction | `"horizontal"` / `"vertical"` |  `"horizontal"` | Determines timeline direction |
 
   **Example:**

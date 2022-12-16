@@ -1,5 +1,5 @@
 import type { TimelineDirection } from 'lib/types';
-import React, { createContext, useContext } from 'react';
+import React, { useContext, useMemo, createContext } from 'react';
 import { LibError } from 'lib/utils';
 import { DEFAULT_TIMELINE_DIRECTION } from 'lib/config';
 
@@ -9,39 +9,38 @@ export interface TimelineContextValue {
   direction: TimelineDirection;
 }
 
-export const TimelineCtx = createContext<TimelineContextValue | undefined>(undefined);
+export const TimelineCtx = createContext<TimelineContextValue | null>(null);
 
-interface TimelineProviderProps {
+TimelineCtx.displayName = 'TimelineContext';
+
+interface TimelineProviderProps extends Omit<TimelineContextValue, 'direction'> {
   children: React.ReactElement;
-  startDate: TimelineContextValue['startDate'];
-  endDate: TimelineContextValue['endDate'];
   direction?: TimelineContextValue['direction'];
 }
 
 export default function TimelineProvider({
-  children,
   startDate,
   endDate,
   direction = DEFAULT_TIMELINE_DIRECTION,
+  children,
 }: TimelineProviderProps) {
-  return (
-    <TimelineCtx.Provider
-      value={{
-        startDate,
-        endDate,
-        direction,
-      }}
-    >
-      {children}
-    </TimelineCtx.Provider>
+  const value = useMemo<TimelineContextValue>(
+    () => ({
+      startDate,
+      endDate,
+      direction,
+    }),
+    [startDate, endDate, direction],
   );
+
+  return <TimelineCtx.Provider value={value}>{children}</TimelineCtx.Provider>;
 }
 
 export const useTimelineContext = () => {
   const value = useContext(TimelineCtx);
 
   if (!value) {
-    throw new LibError('"useTimelineContext" cannot be used outside of the TimelineCtx!');
+    throw new LibError('"useTimelineContext" cannot be used outside of the TimelineContext!');
   }
 
   return value;
