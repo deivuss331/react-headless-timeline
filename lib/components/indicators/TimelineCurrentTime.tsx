@@ -1,30 +1,27 @@
 import type { CSSProperties } from 'react';
 import { useState, useEffect } from 'react';
-import { addMinutes, differenceInMilliseconds, roundToNearestMinutes } from 'date-fns';
-import { useOffsetCalculator } from 'lib/hooks';
 import { useTimelineContext } from 'lib/components/TimelineProvider';
-
-const MILLISECONDS_IN_SECOND = 1000;
-const SECONDS_IN_MINUTE = 60;
-const MILLISECONDS_IN_MINUTE = SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
-
-const DEFAULT_UPDATE_INTERVAL: NonNullable<TimelineCurrentTimeProps['updateInterval']> = 'minute';
+import {
+  addMinutes,
+  differenceInMilliseconds,
+  roundToNearestMinutes,
+  secondsToMilliseconds,
+  minutesToMilliseconds,
+} from 'date-fns';
+import offsetCalculator from 'lib/utils/offsetCalculator';
 
 interface TimelineCurrentTimeProps {
-  updateInterval?: 'second' | 'minute';
   render: (props: { currentTime: Date; styles: CSSProperties }) => JSX.Element | null;
+  updateInterval?: 'second' | 'minute';
 }
 
-export default function TimelineCurrentTime({
-  updateInterval = DEFAULT_UPDATE_INTERVAL,
-  render,
-}: TimelineCurrentTimeProps) {
+export default function TimelineCurrentTime({ updateInterval = 'minute', render }: TimelineCurrentTimeProps) {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const { direction } = useTimelineContext();
-  const calcOffset = useOffsetCalculator();
+  const timeline = useTimelineContext();
+
+  const calcOffset = offsetCalculator(timeline);
 
   const isSecondInterval = updateInterval === 'second';
-  const isHorizontalTimeline = direction === 'horizontal';
 
   useEffect(() => {
     const now = new Date();
@@ -35,14 +32,12 @@ export default function TimelineCurrentTime({
 
     const updateCurrentTime = () => setCurrentTime(roundToNearestMinutes(new Date()));
 
-    let interval = isSecondInterval
-      ? setInterval(updateCurrentTime, MILLISECONDS_IN_SECOND)
-      : undefined;
+    let interval = isSecondInterval ? setInterval(updateCurrentTime, secondsToMilliseconds(1)) : undefined;
 
     const timeout = isSecondInterval
       ? undefined
       : setTimeout(() => {
-          interval = setInterval(updateCurrentTime, MILLISECONDS_IN_MINUTE);
+          interval = setInterval(updateCurrentTime, minutesToMilliseconds(1));
           updateCurrentTime();
         }, nowToNextFullMinuteInMilliseconds);
 
@@ -50,11 +45,11 @@ export default function TimelineCurrentTime({
       clearTimeout(timeout);
       clearInterval(interval);
     };
-  }, [updateInterval]);
+  }, [updateInterval, isSecondInterval]);
 
   const styles: CSSProperties = {
     position: 'absolute',
-    ...(isHorizontalTimeline ? { left: calcOffset(currentTime) } : { top: calcOffset(currentTime) }),
+    ...calcOffset(currentTime),
   };
 
   return render({ currentTime, styles });
