@@ -22,8 +22,11 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
-    "react/require-default-props": 0,
+    "react/react-in-jsx-scope": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-inferrable-types": "error",
+    "@typescript-eslint/no-use-before-define": 0,
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -33,7 +36,32 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "no-restricted-exports": 0,
+    "no-undef": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-props-no-spreading": 0,
+    "global-require": 0,
+    "import/no-dynamic-require": 0,
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-nested-ternary": 0,
+    "react/no-array-index-key": ["warn"],
+    "react/require-default-props": 0,
+    "radix": 0,
+    "import/no-extraneous-dependencies": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "react/prop-types": 0,
+    "import/no-anonymous-default-export": 0,
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "function-declaration"
+      }
+    ],
+    "import/no-named-as-default": 0
   },
   "settings": {
     "import/parsers": {
