@@ -1,7 +1,8 @@
 import type { CSSProperties } from 'react';
-import { add } from 'date-fns';
-import { useOffsetCalculator } from 'lib/hooks';
+import { useMemo } from 'react';
 import { useTimelineContext } from 'lib/components/TimelineProvider';
+import { add } from 'date-fns';
+import offsetCalculator from 'lib/utils/offsetCalculator';
 
 const MILLISECONDS_IN_SECOND = 1000;
 
@@ -17,23 +18,27 @@ interface TimelineHeaderProps {
 }
 
 export default function TimelineHeaders({ cells = DEFAULT_CELLS_QTY, render }: TimelineHeaderProps) {
-  const { startDate, endDate, direction } = useTimelineContext();
-  const calcOffset = useOffsetCalculator();
+  const timeline = useTimelineContext();
+  const calcOffset = offsetCalculator(timeline);
 
+  const { startDate, endDate } = timeline;
   const hasMoreCellsThanRequired = cells > MIN_CELLS_QTY;
-  const isHorizontalTimeline = direction === 'horizontal';
-
   const cellSizeMs = Math.round((endDate.getTime() - startDate.getTime()) / (cells - 1));
-  const headers = hasMoreCellsThanRequired
-    ? new Array(cells).fill(null).reduce<Date[]>((dates, _, index) => {
-        dates.push(add(startDate, { seconds: (cellSizeMs / MILLISECONDS_IN_SECOND) * index }));
-        return dates;
-      }, [])
-    : [startDate, endDate];
+
+  const headers = useMemo(
+    () =>
+      hasMoreCellsThanRequired
+        ? new Array(cells).fill(null).reduce<Date[]>((dates, _, index) => {
+            dates.push(add(startDate, { seconds: (cellSizeMs / MILLISECONDS_IN_SECOND) * index }));
+            return dates;
+          }, [])
+        : [startDate, endDate],
+    [hasMoreCellsThanRequired, cells, startDate, endDate, cellSizeMs],
+  );
 
   const getHeaderStyles = (header: Date): CSSProperties => ({
     position: 'absolute',
-    ...(isHorizontalTimeline ? { left: calcOffset(header) } : { top: calcOffset(header) }),
+    ...calcOffset(header),
   });
 
   return render({ headers, getHeaderStyles });
